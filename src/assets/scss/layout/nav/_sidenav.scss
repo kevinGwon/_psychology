@@ -1,0 +1,74 @@
+// --------------------------------------------------
+// Sidenav
+// --------------------------------------------------
+.is-nav-active {
+    overflow: hidden;
+    height: 100%;
+
+    &:after {
+        content: '';
+        position: fixed;
+        z-index: $z-2;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        left: 0;
+        background-color: rgba(0, 0, 0, 0.5);
+    }
+}
+
+.sidenav {
+    $dur: 0.2s;
+    $ease: cubic-bezier(0, 0.5, 0.5, 1);
+
+    position: fixed;
+    z-index: $z-3;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    max-width: 100%;
+    width: 100%;
+    background-image: url('/static/sidenav.jpg');
+    background-size: 100%;
+    background-color: $white;
+    color: $white;
+    @include transform(translateX(100%));
+
+    &-menu {
+        overflow-y: auto;
+        height: 100%;
+    }
+    .d1 {
+        padding: 2rem 1rem 2rem 4rem;
+        @include h4;
+    }
+    .d2 {
+        overflow: hidden;
+        padding: 1rem 0 0 1rem;
+        @include h5;
+    }
+    .close-sidenav {
+        &.icon-close:before {
+            color: $gray-dark;
+            font-weight: bold;
+            font-size: 1.7rem;
+        }
+
+        @include transition(transform $dur $ease);
+        position: absolute;
+        z-index: 1000;
+        top: 20px;
+        right: 18px;
+        padding: 1.5rem;
+    }
+    @include mq(large) {
+        & {
+            display: none;
+        }
+    }
+    @include mq($until: $w-small - 1px) {
+        & {
+            max-width: 288px;
+        }
+    }
+}
