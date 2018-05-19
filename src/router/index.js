@@ -1,15 +1,16 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-// import HelloWorld from '@/components/HelloWorld'
+import Seunggon from '@/components/page/Seunggon'
 
 Vue.use(Router)
 
 export default new Router({
+  mode: 'history',
   routes: [
-    {
-      path: '/',
-      name: 'HelloWorld'
-      // component: HelloWorld
-    }
+  {
+    path: '/Seunggon',
+    name: 'Seunggon',
+    component: Seunggon
+  }
   ]
 })

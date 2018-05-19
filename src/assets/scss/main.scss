@@ -1,111 +1,409 @@
-.app {
-    font-size: 1.6rem;
+$brand: #1fa2ed;
+$dur: 0.3s;
+$ease: cubic-bezier(0.165, 0.840, 0.440, 1.000);
+
+@mixin dot-pattern {
+  &:before {
+    content: '';
+    display: block;
+    @include full-pos;
+    background-image: url('/psychology/image/a/dot.png');
+  }
 }
-
-.cover {
-    &-slider {
-        color: $white;
-
-        .cont {
-            @include v-mid;
-            position: relative;
-            z-index: 100;
-            height: 100%;
-        }
-        .hash {
-            margin-top: 3rem;
-            font-size: 2rem;
-
-            span {
-                &:before {
-                    content: '#';
-                    display: inline-block;
-                }
-            }
-        }
-        .h-pulse {
-            position: relative;
-        }
-        h1.h {
-            color: inherit;
-            text-transform: uppercase;
-            font-size: 3rem;
-            
-            &.clone {
-                position: absolute;
-                z-index: 100;
-                left: 0;
-                right: 0;
-                top: 0;
-                @include animation(pulse);
-                animation-duration: 1s;
-                animation-iteration-count: infinite;
-            }
-        }        
-        li {
-            position: relative;
-            height: 100vh;
-            background-repeat: no-repeat;
-            background-size: cover;
-            background-position: center;
-
-            &:before {
-                content: '';
-                display: block;
-                @include full-pos;
-                background-image: url('/psychology/image/a/dot.png');
-            }
-            &.no-image {
-                background-color: rgba($black, 0.7);
-
-                &:after {
-                    content: 'Coming soon';
-                    position: absolute;
-                    right: 0;
-                    left: 0;
-                    bottom: 10%;
-                    font-size: 2rem;
-                }
-            }
-        }
-    }
-
-    @include mq($until: medium) {
-        &-slider {
-            text-align: center;
-            h1.h {
-                span {
-                    display: block;
-                }
-            }
-        }
-    }
-}
-
-.profile {
-    &-names {
-        li {
-        }
-        button {
-            padding: 1rem 2rem;
-        }
-    }
-}
-
 @keyframes pulse {
-    from { 
-        @include opacity(1);
-        @include transform(scale(1));
-    }
-    to { 
-        @include opacity(0);
-        @include transform(scale(1.15));
-    }
+  from { 
+    @include opacity(1);
+    @include transform(scale(1));
+  }
+  to { 
+    @include opacity(0);
+    @include transform(scale(1.15));
+  }
 }
+@keyframes bounce {
+  0%{
+    transform: translateY(0px);
+  }
+  100% {
+    transform: translateY(-1em);
+  }
+}
+.app {
+  font-size: 1.6rem;
 
+  &-container {
+    &.is-spa-open {
+      overflow: hidden;
+      @include full-pos;
+    }
+  }
+  @include mq(medium) {
+    &:before {
+      content: '모바일만 지원하는 사이트입니다.';
+      display: block;
+      position: absolute;
+      top: 50%;
+      left: 0;
+      right: 0;
+      padding: 0 3rem;
+      font-size: 2rem;
+      text-align: center;
+    }
+    > * {
+      display: none !important;
+    }
+  }
+}
+.cover {
+  &-slider {
+    color: $white;
+
+    .cont {
+      @include v-mid;
+      position: relative;
+      z-index: 100;
+      height: 100%;
+    }
+    .hash {
+      margin-top: 3rem;
+      font-size: 2rem;
+
+      span {
+        margin: 0 0.2rem;
+        text-shadow: 2px 2px 10px $dark;
+
+        &:before {
+          content: '#';
+          display: inline-block;
+        }
+      }
+    }
+    .h-pulse {
+      position: relative;
+    }
+    h1.h {
+      color: inherit;
+      text-transform: uppercase;
+      font-size: 3rem;
+      text-shadow: 2px 2px 10px $dark;
+
+      &.clone {
+        position: absolute;
+        z-index: 100;
+        left: 0;
+        right: 0;
+        top: 0;
+      }
+    }        
+    li {
+      position: relative;
+      height: 100vh;
+      background-repeat: no-repeat;
+      background-size: cover;
+      background-position: center;
+      @include dot-pattern;
+
+      &.had-study {
+        h1.h {
+          &.clone {
+            @include animation(pulse);
+            animation-duration: 1s;
+            animation-iteration-count: infinite;
+          }
+        }
+      }
+      &.no-image {
+        background-color: rgba($black, 0.7);
+
+        &:after {
+          content: 'Coming soon';
+          position: absolute;
+          right: 0;
+          left: 0;
+          bottom: 10%;
+          font-size: 2rem;
+        }
+      }
+    }
+  }
+
+  @include mq($until: medium) {
+    &-slider {
+      text-align: center;
+      h1.h {
+        span {
+          display: block;
+        }
+      }
+    }
+  }
+}
+.profile {
+  &-title {
+    padding: 3rem 1rem;
+    text-transform: uppercase;
+    text-align: center;
+  }
+  &-names {
+    li {
+      text-align: center;
+    }
+    button {
+      padding: 1rem;
+      text-transform: lowercase;
+    }
+  }
+  &-image {
+    display: block;
+    overflow: hidden;
+    margin: 2rem;
+    @include radius(50%);
+
+    &--small {
+      width: 120px;
+      height: 120px;
+      margin: auto;
+      @include transform(translateY(-50%));
+    }
+  }
+  &-image-list {
+    .slick {
+      &-list {
+        padding: 0 7rem !important;
+      }
+      &-slide {
+        span {
+          @include transition(opacity $dur*2 $ease);
+          opacity: 0;
+        }
+      }
+      &-current {
+        span {
+          opacity: 1;
+        }
+      }
+    }
+    li {
+      text-align: center;
+    }
+  }  
+  &-spa {
+    overflow-x: hidden;
+    overflow-y: auto;
+    position: fixed;
+    z-index: 1000;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    margin: auto;
+    background-color: $white;
+
+    &-cover {
+      overflow: hidden;
+      position: relative;
+      padding-bottom: 50%;
+      text-align: center;
+
+      &--image {
+        @include full-pos;
+        width: 100%;
+        height: 100%;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        @include dot-pattern;
+        @include filter(grayscale(100%));
+      }
+      h1.h {
+        position: absolute;
+        left: 0;
+        right: 0;
+        top: 40%;
+        @include transform(translateY(-50%));
+        color: $white;
+        font-weight: 300;
+      }
+    }
+    &-section {
+      margin-top: -3rem;
+      padding: 0 2rem;
+
+      h2.h {
+        margin: 4rem 0 2rem;
+        font-size: 2rem;
+
+        &:first-child {
+          margin-top: 0;
+        }
+      }
+    }
+    &-btn--prev {
+      position: fixed;
+      z-index: 100;
+      right: 0;
+      bottom: 0;
+      padding: 0.7rem 2rem;
+      letter-spacing: 2px;
+      font-size: 1.5rem;
+
+      &:before {
+        content: '';
+        display: block;
+        @include full-pos;
+        z-index: 0;
+        @include transform(skew(-45deg, 0deg));
+        background-color: $brand;
+      }
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        right: 0;
+        width: 50px;
+        z-index: 0;
+        background-color: $brand;
+      }
+      a {
+        position: relative;
+        z-index: 100;
+        display: block;
+        height: 100%;
+        color: $white;
+      }
+    }
+  }
+}
+.archive {
+
+  h1.h {
+    padding: 3rem 1rem;
+    text-align: center;
+    text-transform: uppercase;
+  }
+  &-list {
+    @include clearfix;
+    margin: 0 0.5rem;
+    @include box-sizing;
+  }
+  li {
+    float: left;
+    width: 50%;
+
+    span {
+      display: block;
+      @include full-pos;
+      margin: 0.5rem;
+      @include shadow(0 1px 5px rgba($dark, 0.2));
+      background-size: cover;
+      background-position: center;
+    }
+    &:nth-child(odd) {
+      padding-bottom: 50%;
+    }
+    &:nth-child(even) {
+      padding-bottom: 70%;
+    }
+    &:nth-child(1) {
+      padding-bottom: 70%;
+    }
+    &:nth-child(2) {
+      padding-bottom: 30%;
+    }
+    &:nth-child(3) {
+      padding-bottom: 50%;
+    }
+    &:nth-child(4) {
+      padding-bottom: 60%;
+    }
+    &:nth-child(5) {
+      padding-bottom: 40%;
+    }
+    &:nth-child(5) {
+      padding-bottom: 30%;
+    }
+  }
+}
+.loading {
+  overflow: hidden;
+  position: fixed;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  text-align: center;
+  width: 100%;
+  height: 100%;
+
+  &:before,
+  &:after {
+    content: '';
+    position: absolute;
+    z-index: 0;
+    top: 0;
+    bottom: 0;
+    height: 100%;
+    background-color: $white;
+    @include transition(width 1s);
+  }
+  &:before {
+    left: 0;
+    width: 50%;
+  }
+  &:after {
+    right: 0;
+    width: 50%;
+  }
+  &.is-blind {
+    @include transition(all 1s ease);
+
+    &:before,
+    &:after {
+      width: 0%;
+    }
+  }
+  &-cell {
+    position: absolute;
+    z-index: 10000;
+    top: 50%;
+    right: 0;
+    left: 0;
+    width: 100%;
+    @include transform(translateY(-50%));
+  }
+  &-letter {
+    color: $brand;
+    padding: 0 .2em;
+    font-size: 1.2em;
+    display: inline-block;
+    animation: bounce $dur*2 $ease infinite alternate;
+    
+    @for $i from 0 through 11 {
+      &:nth-child(#{$i + 1}) {
+        animation-delay: $i * .05s;
+      }
+    }
+  }
+}
 .page-enter-active, .page-leave-active {
-  transition: opacity 1s, transform 0.3s;
+  $ease: ease;
+  $dur: 0.5s;
+
+  transition: all $dur $ease;
+
+  .profile-spa-btn--prev {
+    transition: all $dur $ease;
+  }  
 }
 .page-enter, .page-leave-to {
+  @include transform(translateX(70px));
   opacity: 0;
+
+  .profile-spa-btn--prev {
+    @include transform(translateX(100%));
+  }
 }
