@@ -1,11 +1,6 @@
 <template>
   <div id="app" class="app">
-    <cover></cover>
-    <profile></profile>
-    <transition name="page" mode="out-in">
-      <router-view v-if="routerState"></router-view>
-    </transition>
-    <archive></archive>
+    <!-- 
     <div class="loading">
       <div class="loading-cell">
         <span class="loading-letter">나</span>
@@ -21,57 +16,57 @@
         <span class="loading-letter">행</span>
         <span class="loading-letter">.</span>
       </div>
+    </div>        
+     -->
+    <Header></Header>
+    <div class="content">
+      <Profile></Profile>
+      <Archive></Archive>
     </div>
+    <Footer></Footer>
+    <transition name="page" mode="out-in">
+      <router-view></router-view>
+    </transition>    
   </div>
 </template>
 
 <script>
-import Cover from '@/components/Cover'
+import Header from '@/components/Header'
+import Footer from '@/components/Footer'
 import Profile from '@/components/Profile'
 import Archive from '@/components/Archive'
 
 export default {
   name: 'App',
   components: {
-  	Cover,
+  	Header,
+    Footer,
   	Profile,
     Archive
   },
   data() {
-    return {
-      routerState: false
-    }
+    return {}
   },
   created() {
-    this.$eventBus.$on('routerToggle', this.routerToggle);
-
   },
-  mounted() {
-    let $loading = document.querySelector('.loading'),
-        tl = new TimelineMax();
+  // mounted() {
+  //   let $loading = document.querySelector('.loading'),
+  //       tl = new TimelineMax();
 
-    TweenMax.delayedCall(1.5, function(){
-      tl
-      .staggerTo($loading.querySelectorAll('.loading-letter'), 0.2, {
-        autoAlpha: 0
-      }, 0.05)
-      .set($loading, {
-        className: '+=is-blind'
-      })
-      .set($loading, {
-        className: '+=is-hidden'
-      });
-    });
-  },
+  //   TweenMax.delayedCall(2, function(){
+  //     tl
+  //     .staggerTo($loading.querySelectorAll('.loading-letter'), 0.2, {
+  //       autoAlpha: 0
+  //     }, 0.05)
+  //     .set($loading, {
+  //       className: '+=is-blind'
+  //     })
+  //     .set($loading, {
+  //       className: '+=is-hidden'
+  //     });
+  //   });
+  // },
   methods: {
-    routerToggle(state) {
-
-      if(state == true) {
-        this.routerState = state;
-      }else {
-        this.routerState = !state;
-      }
-    }
   }
 }
 </script>

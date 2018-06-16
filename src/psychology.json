@@ -1,0 +1,135 @@
+{
+  "mirim": {
+    "name": "김미림",
+    "en": "Mirim Kim",
+    "profile": "/psychology/image/members/mirim/profile.jpg",
+    "motto": "모래 한 알에서 세상을 보고<br> 들꽃 한 송이에서 천국을 보고<br> 당신의 손바닥에 무한을 쥐고<br> 그리고 한순간에 영원을 본다",
+    "page": {
+      "cover": "/psychology/image/members/mirim/cover.jpg",
+      "profile": "/psychology/image/members/mirim/profile.jpg",
+      "week": [{
+        "image" : ["/psychology/image/members/mirim/week-1.jpg"]
+      }, {
+        "image" : ["/psychology/image/members/mirim/week-2.jpg"]
+      }, {
+        "image" : ["/psychology/image/members/mirim/week-3.jpg"]
+      }, {
+        "image" : ["/psychology/image/members/mirim/week-4.jpg"]
+      }]
+    }
+  },
+  "daeun": {
+    "name": "이다은",
+    "en": "Daeun Lee",
+    "profile": "/psychology/image/members/daeun/profile.jpg",
+    "motto": "아무 것도 변하지 않을지라도,<br> 내가 변하면 모든것이 변한다",
+    "page": {
+      "cover": "/psychology/image/members/daeun/cover.jpg",
+      "profile": "/psychology/image/members/daeun/profile.jpg",
+      "week": [{
+        "image" : ["/psychology/image/members/daeun/week-1.jpg"]
+      }, {
+        "image" : ["/psychology/image/members/daeun/week-2.jpg"]
+      }, {
+        "image" : ["/psychology/image/members/daeun/week-3.jpg"]
+      }, {
+        "image" : ["/psychology/image/members/daeun/week-4.jpg"]
+      }]
+    }
+  },
+  "youngjun": {
+    "name": "김영준",
+    "en": "Youngjun Kim",
+    "profile": "/psychology/image/members/youngjun/profile.jpg",
+    "motto": "모든일의 시작은 위험한 법이지만<br> 무슨 일을 막론하고 시작하지 않으면<br> 아무것도 시작되지 않는다",
+    "page": {
+      "cover": "/psychology/image/members/youngjun/cover.jpg",
+      "profile": "/psychology/image/members/youngjun/profile.jpg",
+      "week": [{
+        "image" : ["/psychology/image/members/youngjun/week-1.jpg"]
+      }, {
+        "image" : ["/psychology/image/members/youngjun/week-2.jpg"]
+      }, {
+        "image" : ["/psychology/image/members/youngjun/week-3.jpg"]
+      }, {
+        "image" : ["/psychology/image/members/youngjun/week-4.jpg"]
+      }]
+    }
+  },
+  "jiwon": {
+    "name": "임지원",
+    "en": "Jiwon Lim",
+    "profile": "/psychology/image/members/jiwon/profile.jpg",
+    "motto": "왜 굳이 의미를 찾으려 하는가?<br> 인생은 욕망이지 의미가 아니다",
+    "page": {
+      "cover": "/psychology/image/members/jiwon/cover.jpg",
+      "profile": "/psychology/image/members/jiwon/profile.jpg",
+      "week": [{
+        "image" : ["/psychology/image/members/jiwon/week-1.jpg"]
+      }, {
+        "image" : ["/psychology/image/members/jiwon/week-2.jpg"]
+      }, {
+        "image" : ["/psychology/image/members/jiwon/week-3.jpg"]
+      }, {
+        "image" : ["/psychology/image/members/jiwon/week-4.jpg"]
+      }]
+    }
+  },
+  "sangyoun": {
+    "name": "강상윤",
+    "en": "Sangyoun Kang",
+    "profile": "/psychology/image/members/sangyoun/profile.jpg",
+    "motto": "천리 길도 한 걸음부터",
+    "page": {
+      "cover": "/psychology/image/members/sangyoun/cover.jpg",
+      "profile": "/psychology/image/members/sangyoun/profile.jpg",
+      "week": [{
+        "image" : ["/psychology/image/members/sangyoun/week-1.jpg"]
+      }, {
+        "image" : ["/psychology/image/members/sangyoun/week-2.jpg"]
+      }, {
+        "image" : ["/psychology/image/members/sangyoun/week-3.jpg"]
+      }, {
+        "image" : ["/psychology/image/members/sangyoun/week-4.jpg"]
+      }]
+    }
+  },
+  "minji": {
+    "name": "이민지",
+    "en": "Minji Lee",
+    "profile": "/psychology/image/members/minji/profile.jpg",
+    "motto": "Amor vincit omnia",
+    "page": {
+      "cover": "/psychology/image/members/minji/cover.jpg",
+      "profile": "/psychology/image/members/minji/profile.jpg",
+      "week": [{
+        "image" : ["/psychology/image/members/minji/week-1.jpg"]
+      }, {
+        "image" : ["/psychology/image/members/minji/week-2.jpg"]
+      }, {
+        "image" : ["/psychology/image/members/minji/week-3.jpg", "/psychology/image/members/minji/week-3-1.jpg"]
+      }, {
+        "image" : ["/psychology/image/members/minji/week-4.jpg"]
+      }]
+    }
+  },
+  "seunggon": {
+    "name": "권승곤",
+    "en": "Seunggon Gwon",
+    "profile": "/psychology/image/members/seunggon/profile.jpg",
+    "motto": "한사람의 올바른 신념은<br> 수많은 사람의 행동을 변화시킨다",
+    "page": {
+      "cover": "/psychology/image/members/seunggon/cover.jpg",
+      "profile": "/psychology/image/members/seunggon/profile.jpg",
+      "week": [{
+        "image" : ["/psychology/image/members/seunggon/week-1.jpg"]
+      }, {
+        "image" : ["/psychology/image/members/seunggon/week-2.jpg"]
+      }, {
+        "image" : ["/psychology/image/members/seunggon/week-3.jpg"]
+      }, {
+        "image" : ["/psychology/image/members/seunggon/week-4.jpg"]
+      }]
+    }
+  }
+}

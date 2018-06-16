@@ -1,0 +1,29 @@
+{
+  "cover": [
+    {
+      "image": "/psychology/image/cover/cover-01.jpg",
+      "hash": ["첫 번째 모임", "나를 알게되다", "성향검사"]
+    }, {
+      "image": "/psychology/image/cover/cover-02.jpg",
+      "hash": ["두 번째 모임", "용기", "속 마음", "한 발자국 가까워졌다"]
+    }, {
+      "image": "/psychology/image/cover/cover-03.jpg",
+      "hash": ["세 번째 모임"]
+    }, {
+      "image": "/psychology/image/cover/cover-04.jpg",
+      "hash": ["네 번째 모임"]
+    }
+  ],
+  "archive": [
+    "/psychology/image/archive/archive-01.png",
+    "/psychology/image/archive/archive-02.jpg",
+    "/psychology/image/archive/archive-03.jpg",
+    "/psychology/image/archive/archive-04.jpg",
+    "/psychology/image/archive/archive-05.jpg",
+    "/psychology/image/archive/archive-06.jpg",
+    "/psychology/image/archive/archive-07.jpg",
+    "/psychology/image/archive/archive-08.jpg",
+    "/psychology/image/archive/archive-09.jpg",
+    "/psychology/image/archive/archive-10.jpg"
+  ]
+}
