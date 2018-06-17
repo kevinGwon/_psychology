@@ -5,8 +5,13 @@
       <li v-for="list in lists"><button type="button">{{list.name}}</button></li>
     </ul>
     <ul class="profile-image-list">
-      <li v-for="list in lists">
-        <router-link to="/page" class="profile-image" @click.native="changePage(list.en)">
+      <li v-for="(list, key, i) in lists">
+        <router-link class="profile-image"
+          :id="'#page'+i"
+          :href="'#page'+i"
+          to="/page"
+           @click.native="changePage(list.en)"
+          >
           <img :src="list.profile" alt="">
         </router-link>        
         <span v-html="list.motto"></span>
@@ -25,9 +30,9 @@ export default {
     }
   },
   mounted() {
-    let $namesSlider = $('.profile-names'),
-        $imagesSlider = $('.profile-image-list');
-
+      let $namesSlider = $('.profile-names'),
+          $imagesSlider = $('.profile-image-list');
+          
     $namesSlider.slick({
       slidesToShow: 3,
       slidesToScroll: 1,			

@@ -11,20 +11,23 @@ let store = new Vuex.Store({
     coverList: cover,
     archiveList: archive,
     psychologyLists: psychology,
-
-    key: 'seunggon'
+    member: ''
   },
   getters: {
     psychologyLists(state) {
       return state.psychologyLists
     },
     getInfo(state) {
-      return state.psychologyLists[state.key]
+      if(state.member == '') {
+        window.location = '/psychology'
+        return false;
+      }
+      return state.psychologyLists[state.member]
     }
   },
   mutations: {
     changePage(state, payload) {
-      return state.key = payload
+      return state.member = payload
     }
   }
 })
