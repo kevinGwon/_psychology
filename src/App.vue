@@ -1,8 +1,14 @@
 <template>
-  <div id="app" class="app">       
+  <div id="app" class="app">  
+    <!-- 
+    <transition name="main">
+     <loading v-if="$root.loading"></loading>
+     <router-view v-else></router-view>
+   </transition>         
+    -->
     <transition name="main">
       <router-view></router-view>
-    </transition>    
+    </transition>      
     <div class="loading">
       <div class="loading-cell">
         <span class="loading-letter">나</span>

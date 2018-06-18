@@ -257,6 +257,17 @@ $ease: cubic-bezier(0.165, 0.840, 0.440, 1.000);
   &-spa {
     padding-bottom: 3rem;
 
+    &:before {
+      content: '';
+      display: block;
+      position: fixed;
+      z-index: 10;
+      top: 0;
+      left: 0;
+      height: 3px;
+      width: 0%;
+      background-color: $brand;
+    }
     &-cover {
       position: relative;
       padding-bottom: 50%;
@@ -389,9 +400,6 @@ $ease: cubic-bezier(0.165, 0.840, 0.440, 1.000);
     &:nth-child(5) {
       padding-bottom: 40%;
     }
-    &:nth-child(5) {
-      padding-bottom: 30%;
-    }
   }
 }
 .loading {
@@ -478,16 +486,71 @@ $ease: cubic-bezier(0.165, 0.840, 0.440, 1.000);
     background-color: $brand;
   }
 }
-.main-enter-active, .main-leave-active {
-}
+.main-enter-active {
+  $ease: ease;
+  $dur: 1s;
+  $dur-s: 1s;
 
-.main-enter, .main-leave-to {
+  &.main {
+    position: relative;
+    z-index: 100;
+    @include transition(all $dur*2 $ease);
+
+  }
+  &.profile-spa {
+    @include transition(all $dur-s $ease);  
+
+    & + .loader {
+      display: block;
+    }  
+  }
+} 
+.main-leave-active {
   $ease: ease;
   $dur: 0.7s;
-  @include transition(all $dur $ease);
+  $dur-s: 0.3s;
 
-  &:before {
-    width: 100%;
-    @include transition(width $dur $ease);
+  &.main {
+    @include transition(all $dur $ease);
+
+  }
+  &.profile-spa {
+    @include transition(all $dur-s $ease);  
+  }
+}
+.main-leave {
+  $ease: ease;
+  $dur: 0.7s;
+  $dur-s: 0.3s;
+
+  &-to {
+    .loader {
+      display: block;
+    }
+    // &:before {
+    //   width: 100% !important;
+    //   @include transition(width $dur $ease);
+    // }
+  }
+  // &-to.profile-spa {
+    // &:before {
+    //   width: 100% !important;
+    //   @include transition(width $dur-s $ease);
+    // }
+  // }
+}
+.loader {
+  display: none;
+  position: fixed;
+  left: 50%;
+  top: 50%;
+  z-index: 1000;
+  width: 50px;
+  height: 50px;
+  @include transform(translate(-50%, -50%));
+
+  svg path,
+  svg rect {
+    fill: $brand;
   }
 }

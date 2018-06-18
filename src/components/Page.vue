@@ -21,12 +21,15 @@
     </section>
     <div class="profile-spa-btn--prev">
       <router-link to="/">돌아가기</router-link>
-    </div>    
+    </div>     
+    <Loader></Loader>   
   </div>
 </template>
 
 <script>
+  import Loader from '@/components/modules/Loader'
   export default {
+    components: { Loader },
     data() {
       return {
         getInfo: this.$store.getters.getInfo,
