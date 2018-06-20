@@ -7,8 +7,9 @@
    </transition>         
     -->
     <transition name="main">
-      <router-view></router-view>
+      <router-view v-show="!loaded"></router-view>
     </transition>      
+    <Loader v-if="loaded"></Loader>
     <div class="loading">
       <div class="loading-cell">
         <span class="loading-letter">나</span>
@@ -29,8 +30,16 @@
 </template>
 
 <script>
+import Loader from "@/components/modules/Loader"
+
 export default {
   name: 'App',
+  components: { Loader },
+  computed: {
+    loaded() {
+      return this.$store.state.isLoader;
+    }
+  },  
   mounted() {
     let $loading = document.querySelector('.loading'),
         tl = new TimelineMax();

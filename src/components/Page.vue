@@ -5,7 +5,9 @@
       <h1 class="h">{{en}}</h1>
       <div class="profile-image-box">
         <div class="profile-image profile-image--small">
-          <img :src="`${profile}`" alt="">
+          <router-link to="/">
+            <img :src="`${profile}`" alt="">
+          </router-link>
         </div>
         <span class="profile-image-text">{{en}}</span>
       </div>
@@ -19,41 +21,44 @@
         <img v-for="v in week.image" :src="v" alt="">
       </template>
     </section>
-    <div class="profile-spa-btn--prev">
-      <router-link to="/">돌아가기</router-link>
-    </div>     
-    <Loader></Loader>   
+    <ul class="profile-spa-list profile-spa-list__active">
+      <!-- <router-link to="/">돌아가기</router-link> -->
+      <li v-for="(item, key, i) in psychologyLists">
+        <router-link to="/"><img :src="`${item.profile}`" alt=""></router-link>
+      </li>
+    </ul>     
   </div>
 </template>
 
 <script>
-  import Loader from '@/components/modules/Loader'
-  export default {
-    components: { Loader },
-    data() {
-      return {
-        getInfo: this.$store.getters.getInfo,
-        getPage: this.$store.getters.getInfo.page,
-        getPageWeek: this.$store.getters.getInfo.page.week
-      }
+import { mapState } from 'vuex';
+
+export default {
+  data() {
+    return {
+      getInfo: this.$store.getters.getInfo,
+      getPage: this.$store.getters.getInfo.page,
+      getPageWeek: this.$store.getters.getInfo.page.week
+    }
+  },
+  computed: {
+    ...mapState(['psychologyLists']),
+    en() {
+      return this.getInfo.en
     },
-    computed: {
-      en() {
-        return this.getInfo.en
-      },
-      cover() {
-        return this.getPage.cover
-      },
-      profile() {
-        return this.getPage.profile
-      },
-      weeks() {
-        return this.getPageWeek;
-      }
+    cover() {
+      return this.getPage.cover
     },
-    mounted() {
-      let $spa = this.$refs.spa,
-          $profile = $spa.querySelector('.profile-image-box');
+    profile() {
+      return this.getPage.profile
+    },
+    weeks() {
+      return this.getPageWeek;
+    }
+  },
+  mounted() {
+    let $spa = this.$refs.spa,
+        $profile = $spa.querySelector('.profile-image-box');
 
     TweenMax.delayedCall(0.7, function(){
       window.scrollTo(0, 0);
@@ -65,6 +70,8 @@
         }
       }, false);
     });      
-    }
+
+    this.$store.dispatch("loadedTarget", $spa);
   }
+}
 </script>

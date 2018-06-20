@@ -29,6 +29,9 @@ $ease: cubic-bezier(0.165, 0.840, 0.440, 1.000);
   }
 }
 .app {
+  overflow: hidden;
+  max-width: 360px;
+  margin: auto;
   font-size: 1.6rem;
 
   &-container {
@@ -37,29 +40,19 @@ $ease: cubic-bezier(0.165, 0.840, 0.440, 1.000);
       @include full-pos;
     }
   }
-  @include mq(medium) {
-    &:before {
-      content: '모바일만 지원하는 사이트입니다.';
-      display: block;
-      position: absolute;
-      top: 50%;
-      left: 0;
-      right: 0;
-      padding: 0 3rem;
-      font-size: 2rem;
-      text-align: center;
-    }
-    > * {
-      display: none !important;
-    }
-  }
 }
 .header {
   //
 }
+.footer {
+  padding: 1.2rem 0;
+  text-align: center;
+  font-size: 1.4rem;
+}
 .cover {
   &-slider {
     color: $white;
+    text-align: center;
 
     .cont {
       @include v-mid;
@@ -97,6 +90,9 @@ $ease: cubic-bezier(0.165, 0.840, 0.440, 1.000);
         right: 0;
         top: 0;
       }
+      span {
+        display: block;
+      }
     }        
     li {
       position: relative;
@@ -125,17 +121,6 @@ $ease: cubic-bezier(0.165, 0.840, 0.440, 1.000);
           left: 0;
           bottom: 10%;
           font-size: 2rem;      
-        }
-      }
-    }
-  }
-
-  @include mq($until: medium) {
-    &-slider {
-      text-align: center;
-      h1.h {
-        span {
-          display: block;
         }
       }
     }
@@ -311,41 +296,44 @@ $ease: cubic-bezier(0.165, 0.840, 0.440, 1.000);
         }
       }
     }
-    &-btn--prev {
+    &-list {
       position: fixed;
       z-index: 100;
-      right: 0;
-      bottom: 0;
-      padding: 0.7rem 2rem;
+      right: 1rem;
+      bottom: 1rem;
       letter-spacing: 2px;
       font-size: 1.5rem;
+      width: 50px;
+      height: 50px;
 
-      &:before {
-        content: '';
-        display: block;
-        @include full-pos;
-        z-index: 0;
-        @include transform(skew(-45deg, 0deg));
-        background-color: $brand;
-      }
-      &:after {
-        content: '';
-        display: block;
+      li {
+        overflow: hidden;
         position: absolute;
-        top: 0;
         bottom: 0;
         right: 0;
         width: 50px;
-        z-index: 0;
-        background-color: $brand;
+        height: 50px;
+        @include radius(50%);
+        @include opacity(0);
+        @include shadow(2px 2px 7px rgba($black, 0.8));
+        @include transition(all 0.3s ease);
       }
       a {
         position: relative;
         z-index: 100;
         display: block;
-        height: 100%;
-        color: $white;
       }
+      &__active {
+        li {
+          @include opacity(1);
+
+          @for $i from 1 through 6 {
+            &:nth-child(#{$i}) {
+              margin-bottom: 60px * $i;
+            }
+          }
+        }        
+      }      
     }
   }
 }
@@ -464,12 +452,6 @@ $ease: cubic-bezier(0.165, 0.840, 0.440, 1.000);
     }
   }
 }
-.footer {
-  padding: 1.2rem 0;
-  text-align: center;
-  font-size: 1.4rem;
-}
-
 .main {
   position: relative;
   z-index: 1000;
@@ -486,61 +468,7 @@ $ease: cubic-bezier(0.165, 0.840, 0.440, 1.000);
     background-color: $brand;
   }
 }
-.main-enter-active {
-  $ease: ease;
-  $dur: 1s;
-  $dur-s: 1s;
-
-  &.main {
-    position: relative;
-    z-index: 100;
-    @include transition(all $dur*2 $ease);
-
-  }
-  &.profile-spa {
-    @include transition(all $dur-s $ease);  
-
-    & + .loader {
-      display: block;
-    }  
-  }
-} 
-.main-leave-active {
-  $ease: ease;
-  $dur: 0.7s;
-  $dur-s: 0.3s;
-
-  &.main {
-    @include transition(all $dur $ease);
-
-  }
-  &.profile-spa {
-    @include transition(all $dur-s $ease);  
-  }
-}
-.main-leave {
-  $ease: ease;
-  $dur: 0.7s;
-  $dur-s: 0.3s;
-
-  &-to {
-    .loader {
-      display: block;
-    }
-    // &:before {
-    //   width: 100% !important;
-    //   @include transition(width $dur $ease);
-    // }
-  }
-  // &-to.profile-spa {
-    // &:before {
-    //   width: 100% !important;
-    //   @include transition(width $dur-s $ease);
-    // }
-  // }
-}
 .loader {
-  display: none;
   position: fixed;
   left: 50%;
   top: 50%;
@@ -553,4 +481,18 @@ $ease: cubic-bezier(0.165, 0.840, 0.440, 1.000);
   svg rect {
     fill: $brand;
   }
+}
+
+.main-enter-active,
+.main-leave-active {
+  $ease: ease;
+  $dur: 0.7s;
+
+  @include transition(all $dur $ease);
+  @include transform(translateX(10%));
+  opacity: 0.5;
+} 
+.main-enter-to {
+  @include transform(translateX(0));
+  opacity: 1;
 }
