@@ -22,9 +22,11 @@
       </template>
     </section>
     <ul class="profile-spa-list profile-spa-list__active">
-      <!-- <router-link to="/">돌아가기</router-link> -->
-      <li v-for="(item, key, i) in psychologyLists">
-        <router-link to="/"><img :src="`${item.profile}`" alt=""></router-link>
+      <li 
+        v-for="(item, key, i) in psychologyLists" 
+        v-if="getInfo.en.split(' ')[0].toLowerCase() != key"
+      >
+        <router-link to="/" @click.native="changePage(key)"><img :src="`${item.profile}`" alt=""></router-link>
       </li>
     </ul>     
   </div>
@@ -72,6 +74,13 @@ export default {
     });      
 
     this.$store.dispatch("loadedTarget", $spa);
+  },
+  methods: {
+    changePage(enName) {
+      let name = enName.split(' ')[0].toLowerCase();
+      
+      this.$store.commit('changePage', name);
+    }
   }
 }
 </script>

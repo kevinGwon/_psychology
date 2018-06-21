@@ -30,7 +30,9 @@ let store = new Vuex.Store({
   mutations: {
     changePage(state, name) {
       console.log('before = '+ state.isLoader)
-      state.isLoader = !state.isLoader
+      if(state.isLoader == false) {
+        state.isLoader = !state.isLoader
+      }
       console.log('after = '+ state.isLoader)
       state.member = name
     },

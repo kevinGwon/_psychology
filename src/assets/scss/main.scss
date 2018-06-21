@@ -30,7 +30,7 @@ $ease: cubic-bezier(0.165, 0.840, 0.440, 1.000);
 }
 .app {
   overflow: hidden;
-  max-width: 360px;
+  max-width: 520px;
   margin: auto;
   font-size: 1.6rem;
 
@@ -329,7 +329,7 @@ $ease: cubic-bezier(0.165, 0.840, 0.440, 1.000);
 
           @for $i from 1 through 6 {
             &:nth-child(#{$i}) {
-              margin-bottom: 60px * $i;
+              margin-bottom: 60px * ($i - 1);
             }
           }
         }        
