@@ -1,19 +1,19 @@
 <template>
-  <div class="profile-spa" ref="spa">
+  <div class="profile-spa" ref="spa" v-show="!isLoader">
     <div class="profile-spa-cover">
-      <div class="profile-spa-cover--image" :style="{backgroundImage: `url('${cover}')`}"></div>
-      <h1 class="h">{{en}}</h1>
+      <div class="profile-spa-cover--image" :style="{backgroundImage: `url('${getInfo.page.cover}')`}"></div>
+      <h1 class="h">{{getInfo.en}}</h1>
       <div class="profile-image-box">
         <div class="profile-image profile-image--small">
           <router-link to="/">
-            <img :src="`${profile}`" alt="">
+            <img :src="`${getInfo.page.profile}`" alt="">
           </router-link>
         </div>
-        <span class="profile-image-text">{{en}}</span>
+        <span class="profile-image-text">{{getInfo.en}}</span>
       </div>
     </div>
     <section class="profile-spa-section">
-      <template v-for="(week, k) in weeks">
+      <template v-for="(week, k) in getInfo.page.week">
         <h2 v-if="k+1 == 1" class="h">1 Week - 개인성향 검사</h2>
         <h2 v-else-if="k+1 == 2" class="h">2 Week - 자신의 인생 그래프</h2>
         <h2 v-else-if="k+1 == 3" class="h">3 Week - 클레이카드</h2>
@@ -22,41 +22,23 @@
       </template>
     </section>
     <ul class="profile-spa-list profile-spa-list__active">
-      <li 
-        v-for="(item, key, i) in psychologyLists" 
-        v-if="getInfo.en.split(' ')[0].toLowerCase() != key"
+      <li
+        v-for="(item, key, i) in psychologyLists"
+        v-if="member != key"
       >
-        <router-link to="/" @click.native="changePage(key)"><img :src="`${item.profile}`" alt=""></router-link>
+        <router-link to="/page" @click.native="changePage(key)"><img :src="`${item.profile}`" alt=""></router-link>
       </li>
-    </ul>     
+    </ul>
   </div>
 </template>
 
 <script>
-import { mapState } from 'vuex';
+import { mapState, mapGetters } from 'vuex';
 
 export default {
-  data() {
-    return {
-      getInfo: this.$store.getters.getInfo,
-      getPage: this.$store.getters.getInfo.page,
-      getPageWeek: this.$store.getters.getInfo.page.week
-    }
-  },
   computed: {
-    ...mapState(['psychologyLists']),
-    en() {
-      return this.getInfo.en
-    },
-    cover() {
-      return this.getPage.cover
-    },
-    profile() {
-      return this.getPage.profile
-    },
-    weeks() {
-      return this.getPageWeek;
-    }
+    ...mapState(['psychologyLists', 'member', 'isLoader']),
+    ...mapGetters(['getInfo'])
   },
   mounted() {
     let $spa = this.$refs.spa,
@@ -71,15 +53,20 @@ export default {
           $profile.classList.remove( 'is-fixed' );
         }
       }, false);
-    });      
-
-    this.$store.dispatch("loadedTarget", $spa);
+    });
+    this.loaderTrigger();
   },
   methods: {
+    loaderTrigger() {
+      let $spa = this.$refs.spa;
+
+      this.$store.dispatch("loadedTarget", $spa);
+    },
     changePage(enName) {
       let name = enName.split(' ')[0].toLowerCase();
-      
+
       this.$store.commit('changePage', name);
+      this.loaderTrigger();
     }
   }
 }

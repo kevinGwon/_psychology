@@ -30,15 +30,12 @@ let store = new Vuex.Store({
   mutations: {
     changePage(state, name) {
       console.log('before = '+ state.isLoader)
-      if(state.isLoader == false) {
-        state.isLoader = !state.isLoader
-      }
+      state.isLoader = !state.isLoader
       console.log('after = '+ state.isLoader)
       state.member = name
     },
     loaded(state, current) {
       state.isLoader = current
-      console.log('finished = '+ state.isLoader)
     }
   },
   actions: {
@@ -46,6 +43,8 @@ let store = new Vuex.Store({
       new imagesLoaded($target, () => {
         console.log("All loaded!!");
         context.commit("loaded", false)
+        console.log('finished = '+ context.state.isLoader)
+        console.log('member = '+ context.state.member)
       });
     }
   }
