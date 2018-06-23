@@ -69,7 +69,7 @@
       }, {
         "image" : ["/psychology/image/members/jiwon/week-2.jpg"]
       }, {
-        "image" : ["/psychology/image/members/jiwon/week-3.jpg"]
+        "image" : ["/psychology/image/members/jiwon/week-3.jpg","/psychology/image/members/jiwon/week-3-1.jpg"]
       }, {
         "image" : ["/psychology/image/members/jiwon/week-4.jpg"]
       }]
@@ -103,7 +103,7 @@
       "cover": "/psychology/image/members/minji/cover.jpg",
       "profile": "/psychology/image/members/minji/profile.jpg",
       "week": [{
-        "image" : ["/psychology/image/members/minji/week-1.jpg"]
+        "image" : ["/psychology/image/members/minji/week-1.jpg", "/psychology/image/members/minji/week-1-1.jpg"]
       }, {
         "image" : ["/psychology/image/members/minji/week-2.jpg"]
       }, {

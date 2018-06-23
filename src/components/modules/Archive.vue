@@ -29,7 +29,7 @@ export default {
       let top = window.pageYOffset + window.screen.height,
           achiveTop = $archive.offsetTop + $archive.clientHeight
 
-      if(top > achiveTop) {
+      if(top > achiveTop && this.$refs.archive != undefined) {
         if(this.isArchive || this.lists.length < this.archiveLength) return
         this.$store.commit('addImage', true)
         this.$store.dispatch('loaderTrigger')
@@ -37,7 +37,7 @@ export default {
     }, false);
   },
   computed: {
-    ...mapState(['archiveLength','isArchive'])
+    ...mapState(['archiveLength','isArchive', 'isLoader'])
   }
 }
 </script>

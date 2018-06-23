@@ -1,5 +1,5 @@
 <template>
-  <div class="profile-spa" ref="spa" v-show="!isLoader">
+  <div class="profile-spa" ref="spa" v-show="!isLoader" @click.stop="active = !active">
     <header class="profile-spa-cover">
       <div class="profile-spa-cover--image" :style="{backgroundImage: `url('${getInfo.page.cover}')`}"></div>
       <h1 class="h">{{getInfo.en}}</h1>
@@ -21,7 +21,7 @@
       </template>
     </section>
     <div class="profile-spa-toggle" :class="{'is-active':active}">
-      <button type="buttn" class="btn" @click="active = !active">m</button>
+      <button type="buttn" class="btn" @click.stop="active = !active">m</button>
       <ul class="profile-spa-list">
         <li
           v-for="(item, key, i) in psychologyLists"

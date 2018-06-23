@@ -52,9 +52,11 @@ let store = new Vuex.Store({
       new imagesLoaded(document.getElementsByClassName('app'), () => {
         // console.log("All loaded!!");
         if(context.state.isLoader) {
+          console.log('[isLoader]'+context.state.isLoader)
           context.commit("loaded", false)
         }
         if(context.state.isArchive) {
+          console.log('[isArchive]'+context.state.isArchive)
           context.state.archiveLength += 3
           context.commit("addImage", false)
         }
