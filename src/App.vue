@@ -1,15 +1,9 @@
 <template>
   <div id="app" class="app">  
-    <!-- 
     <transition name="main">
-     <loading v-if="$root.loading"></loading>
-     <router-view v-else></router-view>
-   </transition>         
-    -->
-    <transition name="main">
-      <router-view v-show="!loaded"></router-view>
+      <router-view v-show="!isLoader"></router-view>
     </transition>      
-    <Loader v-if="loaded"></Loader>
+    <Loader v-if="isLoader || isArchive"></Loader>
     <div class="loading">
       <div class="loading-cell">
         <span class="loading-letter">나</span>
@@ -30,15 +24,14 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import Loader from "@/components/modules/Loader"
 
 export default {
   name: 'App',
   components: { Loader },
   computed: {
-    loaded() {
-      return this.$store.state.isLoader;
-    }
+    ...mapState(['isLoader', 'isArchive'])
   },  
   mounted() {
     let $loading = document.querySelector('.loading'),

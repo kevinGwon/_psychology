@@ -12,8 +12,12 @@ let store = new Vuex.Store({
     coverList: cover,
     archiveList: archive,
     psychologyLists: psychology,
+
     member: '',
-    isLoader: false
+    archiveLength: 3,
+    
+    isLoader: false,
+    isArchive: false,
   },
   getters: {
     psychologyLists(state) {
@@ -22,30 +26,46 @@ let store = new Vuex.Store({
     getInfo(state) {
       if(state.member == '') {
         window.location = '/psychology'
-        return false;
+        return false
       }
       return state.psychologyLists[state.member]
     }
   },
   mutations: {
     changePage(state, name) {
-      console.log('before = '+ state.isLoader)
+      // console.log('before = '+ state.isLoader)
       state.isLoader = !state.isLoader
-      console.log('after = '+ state.isLoader)
+      // console.log('after = '+ state.isLoader)
       state.member = name
+    },
+    addImage(state, current) {
+      state.isArchive = current
+
+      // console.log(current)
     },
     loaded(state, current) {
       state.isLoader = current
     }
   },
   actions: {
-    loadedTarget(context, $target) {
-      new imagesLoaded($target, () => {
-        console.log("All loaded!!");
-        context.commit("loaded", false)
-        console.log('finished = '+ context.state.isLoader)
-        console.log('member = '+ context.state.member)
+    loaderTrigger(context) {
+      new imagesLoaded(document.getElementsByClassName('app'), () => {
+        // console.log("All loaded!!");
+        if(context.state.isLoader) {
+          context.commit("loaded", false)
+        }
+        if(context.state.isArchive) {
+          context.state.archiveLength += 3
+          context.commit("addImage", false)
+        }
+        // console.log('finished = '+ context.state.isLoader)
+        // console.log('member = '+ context.state.member)
       });
+    },
+    scrollToMember(context) {
+      setTimeout(()=>{
+        window.scroll(0, document.getElementsByClassName('profile')[0].offsetTop)
+      }, 1)
     }
   }
 })

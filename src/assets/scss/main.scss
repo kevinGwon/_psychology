@@ -20,6 +20,15 @@ $ease: cubic-bezier(0.165, 0.840, 0.440, 1.000);
     @include transform(scale(1.15));
   }
 }
+@keyframes pulse2 {
+  70% {
+    @include transform(scale(1));
+    box-shadow: 0 0 0 10px rgba($brand, 0);
+  }
+  100% {
+    box-shadow: 0 0 0 0 rgba($brand, 0);
+  }
+}
 @keyframes bounce {
   0%{
     transform: translateY(0px);
@@ -41,8 +50,23 @@ $ease: cubic-bezier(0.165, 0.840, 0.440, 1.000);
     }
   }
 }
+.main {
+  position: relative;
+  z-index: 1000;
+
+  &:before {
+    content: '';
+    display: block;
+    position: fixed;
+    z-index: 10;
+    top: 0;
+    left: 0;
+    height: 3px;
+    width: 0%;
+    background-color: $brand;
+  }
+}
 .header {
-  //
 }
 .footer {
   padding: 1.2rem 0;
@@ -155,49 +179,13 @@ $ease: cubic-bezier(0.165, 0.840, 0.440, 1.000);
       bottom: -60px;
       height: 120px;
       width: 100%;
-      margin: auto;
-
-      &.is-fixed {
-        &:before {
-          content: '';
-          display: block;
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          width: 100%;
-          height: 45px;
-          background-color: rgba($white, 0.7);
-        }
-        .profile-image {
-          &--small {
-            position: fixed;
-            left: 0;
-            top: 0;
-            right: auto;
-            bottom: auto;
-            margin: 0;
-            width: 35px;
-            height: 35px;
-            margin: 5px 0 0 5px;
-          }
-          &-text {
-            display: block;
-            position: fixed;
-            top: 10px;
-            left: 50px;
-          }
-        }
-      }      
+      margin: auto;   
     }
     &--small {
       position: relative;
       width: 120px;
       height: 120px;
       margin: auto;
-    }
-    &-text {
-      display: none;
     }
   }
   &-image-list {
@@ -240,19 +228,44 @@ $ease: cubic-bezier(0.165, 0.840, 0.440, 1.000);
     }
   }  
   &-spa {
-    padding-bottom: 3rem;
-
-    &:before {
-      content: '';
-      display: block;
-      position: fixed;
-      z-index: 10;
-      top: 0;
-      left: 0;
-      height: 3px;
-      width: 0%;
-      background-color: $brand;
-    }
+    &.is-fixed {
+      &:before {
+        content: '';
+        display: block;
+        position: fixed;
+        z-index: 1;
+        top: 0;
+        left: 0;
+        right: 0;
+        width: 100%;
+        height: 45px;
+        background-color: rgba($white, 0.7);
+      }
+      h1.h {
+        position: fixed;
+        z-index: 2;
+        top: 12px;
+        left: 50px;
+        right: auto;
+        color: $dark;
+        font-size: 1.5rem;
+        font-weight: normal;
+        @include transform(translateY(0));
+      }        
+      .profile-image {
+        &--small {
+          position: fixed;
+          left: 0;
+          top: 0;
+          right: auto;
+          bottom: auto;
+          margin: 0;
+          width: 35px;
+          height: 35px;
+          margin: 5px 0 0 5px;
+        }
+      }
+    }       
     &-cover {
       position: relative;
       padding-bottom: 50%;
@@ -296,44 +309,69 @@ $ease: cubic-bezier(0.165, 0.840, 0.440, 1.000);
         }
       }
     }
-    &-list {
+    &-toggle {
       position: fixed;
       z-index: 100;
-      right: 1rem;
-      bottom: 1rem;
+      right: 1.2rem;
+      bottom: 2rem;
       letter-spacing: 2px;
       font-size: 1.5rem;
       width: 50px;
       height: 50px;
-
+ 
+       &.is-active {
+        .btn {
+          @include animation(none);
+        }
+        li {
+          @include opacity(1);
+          @include transform(rotate(0deg) scale(1));
+        }        
+      } 
+      .btn {
+        display: block;
+        position: relative;
+        z-index: 10;
+        width: 100%;
+        height: 100%;
+        border-radius: 50%;
+        background: $brand;
+        color: $white;
+        font-family: sans-serif;
+        text-transform: uppercase;
+        font-size: 2.2rem;
+        line-height: 50px;
+        box-shadow: 0 0 0 0 rgba($brand, .5);
+        @include animation(pulse2 1.5s infinite);
+      }   
+    }
+    &-list {       
       li {
         overflow: hidden;
         position: absolute;
         bottom: 0;
         right: 0;
-        width: 50px;
-        height: 50px;
+        width: 100%;
+        height: 100%;
         @include radius(50%);
         @include opacity(0);
-        @include shadow(2px 2px 7px rgba($black, 0.8));
-        @include transition(all 0.3s ease);
+        @include shadow(2px 2px 7px rgba($dark, 0.8));
+        @include transform(rotate(-360deg) scale(0));
+
+        @for $i from 1 through 6 {
+          &:nth-child(#{$i}) {
+            $delay: 30ms * $i;
+
+            margin-bottom: 60px * $i;
+            @include transition(all $dur/2 $delay ease);
+          }
+        }
       }
       a {
         position: relative;
         z-index: 100;
         display: block;
       }
-      &__active {
-        li {
-          @include opacity(1);
-
-          @for $i from 1 through 6 {
-            &:nth-child(#{$i}) {
-              margin-bottom: 60px * ($i - 1);
-            }
-          }
-        }        
-      }      
     }
   }
 }
@@ -443,29 +481,13 @@ $ease: cubic-bezier(0.165, 0.840, 0.440, 1.000);
     padding: 0 .2em;
     font-size: 1.1em;
     display: inline-block;
-    animation: bounce $dur*2 $ease infinite alternate;
+    @include animation(bounce $dur*2 $ease infinite alternate);
     
     @for $i from 0 through 11 {
       &:nth-child(#{$i + 1}) {
         animation-delay: $i * .05s;
       }
     }
-  }
-}
-.main {
-  position: relative;
-  z-index: 1000;
-
-  &:before {
-    content: '';
-    display: block;
-    position: fixed;
-    z-index: 10;
-    top: 0;
-    left: 0;
-    height: 3px;
-    width: 0%;
-    background-color: $brand;
   }
 }
 .loader {
@@ -486,13 +508,13 @@ $ease: cubic-bezier(0.165, 0.840, 0.440, 1.000);
 .main-enter-active,
 .main-leave-active {
   $ease: ease;
-  $dur: 0.7s;
+  $dur: 0.4s;
 
   @include transition(all $dur $ease);
-  @include transform(translateX(10%));
-  opacity: 0.5;
+  @include transform(translateX(100%));
+  // opacity: 0.3;
 } 
 .main-enter-to {
   @include transform(translateX(0));
-  opacity: 1;
+  // opacity: 1;
 }

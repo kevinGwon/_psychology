@@ -1,17 +1,16 @@
 <template>
   <div class="profile-spa" ref="spa" v-show="!isLoader">
-    <div class="profile-spa-cover">
+    <header class="profile-spa-cover">
       <div class="profile-spa-cover--image" :style="{backgroundImage: `url('${getInfo.page.cover}')`}"></div>
       <h1 class="h">{{getInfo.en}}</h1>
       <div class="profile-image-box">
         <div class="profile-image profile-image--small">
-          <router-link to="/">
+          <router-link to="/" @click.native="scrollToMember">
             <img :src="`${getInfo.page.profile}`" alt="">
           </router-link>
         </div>
-        <span class="profile-image-text">{{getInfo.en}}</span>
       </div>
-    </div>
+    </header>
     <section class="profile-spa-section">
       <template v-for="(week, k) in getInfo.page.week">
         <h2 v-if="k+1 == 1" class="h">1 Week - 개인성향 검사</h2>
@@ -21,24 +20,31 @@
         <img v-for="v in week.image" :src="v" alt="">
       </template>
     </section>
-    <ul class="profile-spa-list profile-spa-list__active">
-      <li
-        v-for="(item, key, i) in psychologyLists"
-        v-if="member != key"
-      >
-        <router-link to="/page" @click.native="changePage(key)"><img :src="`${item.profile}`" alt=""></router-link>
-      </li>
-    </ul>
+    <div class="profile-spa-toggle" :class="{'is-active':active}">
+      <button type="buttn" class="btn" @click="active = !active">m</button>
+      <ul class="profile-spa-list">
+        <li
+          v-for="(item, key, i) in psychologyLists"
+          v-if="member != key"
+        >
+          <router-link to="/page" @click.native="changePage(key)"><img :src="`${item.profile}`" alt=""></router-link>
+        </li>
+      </ul>
+    </div>
+    <Footer></Footer>
   </div>
 </template>
 
 <script>
-import { mapState, mapGetters } from 'vuex';
+import { mapState, mapGetters } from 'vuex'
+import Footer from '@/components/modules/Footer'
 
 export default {
-  computed: {
-    ...mapState(['psychologyLists', 'member', 'isLoader']),
-    ...mapGetters(['getInfo'])
+  components: { Footer },
+  data() {
+    return {
+      active: false
+    }
   },
   mounted() {
     let $spa = this.$refs.spa,
@@ -48,25 +54,31 @@ export default {
       window.scrollTo(0, 0);
       window.addEventListener('scroll', function(){
         if ($profile.offsetTop < window.pageYOffset) {
-          $profile.classList.add( 'is-fixed' );
+          $spa.classList.add( 'is-fixed' );
         } else {
-          $profile.classList.remove( 'is-fixed' );
+          $spa.classList.remove( 'is-fixed' );
         }
       }, false);
     });
-    this.loaderTrigger();
+    this.loaderTrigger()
   },
+  computed: {
+    ...mapState(['psychologyLists', 'member', 'isLoader']),
+    ...mapGetters(['getInfo'])
+  },  
   methods: {
     loaderTrigger() {
-      let $spa = this.$refs.spa;
-
-      this.$store.dispatch("loadedTarget", $spa);
+      this.$store.dispatch("loaderTrigger")
     },
     changePage(enName) {
-      let name = enName.split(' ')[0].toLowerCase();
+      let name = enName.split(' ')[0].toLowerCase()
 
-      this.$store.commit('changePage', name);
-      this.loaderTrigger();
+      this.$store.commit('changePage', name)
+      this.loaderTrigger()
+      this.active = !this.active
+    },
+    scrollToMember() {
+      this.$store.dispatch('scrollToMember')
     }
   }
 }

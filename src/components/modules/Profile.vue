@@ -1,5 +1,5 @@
 <template>
-  <div class="profile">
+  <div class="profile" ref="profile">
     <h1 class="profile-title">Members</h1>
     <ul class="profile-names">
       <li v-for="list in lists"><button type="button">{{list.name}}</button></li>
@@ -10,7 +10,7 @@
           :id="'#page'+i"
           :href="'#page'+i"
           to="/page"
-           @click.native="changePage(list.en)"
+           @click.native.prevent="changePage(list.en)"
           >
           <img :src="list.profile" alt="">
         </router-link>        
@@ -21,6 +21,7 @@
 </template>
 
 <script>
+import { mapState } from 'vuex'
 import 'slick-carousel'
 
 export default {
@@ -29,13 +30,16 @@ export default {
       lists: this.$store.getters.psychologyLists
     }
   },
+  computed: {
+    ...mapState(['isLoader'])
+  },  
   mounted() {
-      let $namesSlider = $('.profile-names'),
-          $imagesSlider = $('.profile-image-list');
-          
+    let $namesSlider = $('.profile-names'),
+        $imagesSlider = $('.profile-image-list');
+
     $namesSlider.slick({
       slidesToShow: 3,
-      slidesToScroll: 1,			
+      slidesToScroll: 1,      
       centerMode: true,
       arrows: false,
       asNavFor: '.profile-image-list',
@@ -51,14 +55,14 @@ export default {
     })
     .slick({
       slidesToShow: 1,
-      slidesToScroll: 1,			
+      slidesToScroll: 1,      
       centerMode: true,
       arrows: false,
       adaptiveHeight: true,
       autoplay: true,
       autoplaySpeed: 5000, 
       asNavFor: '.profile-names'
-    });		
+    });   
   },
   methods: {
     changePage(enName) {
