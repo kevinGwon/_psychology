@@ -32,7 +32,9 @@ export default {
       if(top > achiveTop && this.$refs.archive != undefined) {
         if(this.isArchive || this.lists.length < this.archiveLength) return
         this.$store.commit('addImage', true)
-        this.$store.dispatch('loaderTrigger')
+        setTimeout(()=>{
+          this.$store.dispatch('loaderTrigger')
+        }, 500)
       }
     }, false);
   },

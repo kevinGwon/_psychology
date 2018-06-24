@@ -66,8 +66,8 @@ let store = new Vuex.Store({
     },
     scrollToMember(context) {
       setTimeout(()=>{
-        window.scroll(0, document.getElementsByClassName('profile')[0].offsetTop)
-      }, 1)
+        window.scrollTo(0, document.getElementsByClassName('profile')[0].offsetTop)
+      }, 300)
     }
   }
 })

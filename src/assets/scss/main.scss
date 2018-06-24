@@ -518,3 +518,7 @@ $ease: cubic-bezier(0.165, 0.840, 0.440, 1.000);
   @include transform(translateX(0));
   // opacity: 1;
 }
+div[data-name="mojs-shape"] {
+  z-index: 100000;
+  opacity: 0.7 !important;
+}

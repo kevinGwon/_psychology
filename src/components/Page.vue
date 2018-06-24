@@ -1,5 +1,5 @@
 <template>
-  <div class="profile-spa" ref="spa" v-show="!isLoader" @click.stop="active = !active">
+  <div class="profile-spa" ref="spa" v-show="!isLoader" @click="active = false">
     <header class="profile-spa-cover">
       <div class="profile-spa-cover--image" :style="{backgroundImage: `url('${getInfo.page.cover}')`}"></div>
       <h1 class="h">{{getInfo.en}}</h1>
