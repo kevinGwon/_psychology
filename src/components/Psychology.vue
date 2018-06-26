@@ -5,6 +5,7 @@
       <Profile></Profile>
       <Archive></Archive>
     </div>
+    <Comment></Comment>
     <Footer></Footer>
   </main>
 </template>
@@ -14,6 +15,7 @@ import Header from '@/components/modules/Header'
 import Footer from '@/components/modules/Footer'
 import Profile from '@/components/modules/Profile'
 import Archive from '@/components/modules/Archive'
+import Comment from '@/components/modules/Comment'
 
 export default {
   name: 'Main',
@@ -21,7 +23,8 @@ export default {
     Header,
     Footer,
     Profile,
-    Archive
+    Archive,
+    Comment
   }
 }
 </script>

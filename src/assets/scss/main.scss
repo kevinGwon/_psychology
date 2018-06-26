@@ -384,7 +384,7 @@ $ease: cubic-bezier(0.165, 0.840, 0.440, 1.000);
     text-transform: uppercase;
   }
   &-list {
-    @include clearfix;
+    // @include clearfix;
     // margin: 0 0.5rem;
     margin-right: -3px;
     @include box-sizing;
@@ -397,6 +397,20 @@ $ease: cubic-bezier(0.165, 0.840, 0.440, 1.000);
     border-right: 3px solid $white;
     @include box-sizing;
 
+    &.no-more {
+      top: auto !important;
+      left: 0 !important;
+      right: 0 !important;
+      bottom: 0 !important;
+      float: none;
+      height: 50px;
+      width: 100%;
+      padding-bottom: 0 !important;
+      border-bottom: 0;
+      line-height: 50px;
+      text-transform: uppercase;
+      text-align: center;
+    }
     span {
       display: block;
       @include full-pos;
@@ -426,6 +440,53 @@ $ease: cubic-bezier(0.165, 0.840, 0.440, 1.000);
     &:nth-child(5) {
       padding-bottom: 40%;
     }
+  }
+  .func {
+    margin: 2rem 0;
+    text-align: center;
+
+    .btn-more {
+      display: inline-block;
+      position: relative;
+      width: 40px;
+      height: 40px;
+      background-color: $brand;
+      vertical-align: middle;
+      @include radius(50%);
+
+      &.is-loading {
+        @include transition(transform $dur*8 $ease);
+        @include transform(rotate(360deg));
+      }
+      &:before,
+      &:after {
+        content: '';
+        display: block;
+        position: absolute;
+        left: 50%;
+        top: 50%;
+        background-color: $white;
+      }
+      &:before {
+        height: 1px;
+        width: 20px;
+        margin-left: -10px;
+      }
+      &:after {
+        height: 20px;
+        width: 1px;
+        margin-top: -10px;
+      }
+    }
+  }
+}
+.comment {
+  padding: 0 1.5rem;
+
+  h1.h {
+    padding: 3rem 1rem;
+    text-align: center;
+    text-transform: uppercase;
   }
 }
 .loading {

@@ -12,6 +12,9 @@
     }, {
       "image": "/psychology/image/cover/cover-04.jpg",
       "hash": ["네 번째 모임"]
+    }, {
+      "image": "/psychology/image/cover/cover-05.jpg",
+      "hash": ["다섯 번째 모임"]
     }
   ],
   "archive": [
@@ -29,6 +32,11 @@
     "/psychology/image/archive/archive-12.jpg",
     "/psychology/image/archive/archive-13.jpg",
     "/psychology/image/archive/archive-14.jpg",
-    "/psychology/image/archive/archive-15.jpg"
+    "/psychology/image/archive/archive-15.jpg",
+    "/psychology/image/archive/archive-16.jpg",
+    "/psychology/image/archive/archive-17.jpg",
+    "/psychology/image/archive/archive-18.jpg",
+    "/psychology/image/archive/archive-19.jpg",
+    "/psychology/image/archive/archive-20.jpg"
   ]
 }

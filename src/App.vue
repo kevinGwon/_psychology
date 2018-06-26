@@ -79,15 +79,15 @@ export default {
     const swirl4 = new mojs.ShapeSwirl({
       ...SWIRL_OPTS
     });
-    document.body.addEventListener('touchmove', function (e) {
+    document.body.addEventListener('touchend', function (e) {
       x = e.changedTouches[0].pageX
       y = { [e.changedTouches[0].pageY]: e.changedTouches[0].pageY-150 };
 
       $('body').trigger('click')
     });
     document.body.addEventListener('click', function (e) {
-      // x = e.pageX,
-      // y = { [e.pageY]: e.pageY-150 };
+      // x == undefined ? e.pageX : x
+      // y == undefined ? { [e.pageY]: e.pageY-150 } : y
 
       swirl1
         .tune({ x, y })
