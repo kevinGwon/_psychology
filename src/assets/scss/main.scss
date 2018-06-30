@@ -37,6 +37,13 @@ $ease: cubic-bezier(0.165, 0.840, 0.440, 1.000);
     transform: translateY(-1em);
   }
 }
+body {
+
+  &.is-intro {
+    overflow: hidden;
+    height: 100vh;
+  }
+}
 .app {
   overflow: hidden;
   max-width: 520px;
@@ -168,9 +175,30 @@ $ease: cubic-bezier(0.165, 0.840, 0.440, 1.000);
   &-image {
     display: block;
     overflow: hidden;
+    position: relative;
     margin: 2rem;
     @include radius(50%);
 
+    &:before {
+      content: '';
+      display: block;
+      position: absolute;
+      z-index: 1;
+      left: 50%;
+      top: 50%;
+      width: 30px;
+      height: 30px;
+      margin: -15px 0 0 -15px;
+      padding: 0.5rem;
+      background-color: rgba($dark, 0.9);
+      background-image: url('/psychology/image/a/link.svg');
+      background-repeat: no-repeat;
+      background-size: 25px;
+      background-position: center;
+      opacity: 0.7;
+      @include radius(50%);
+      @include transition(all $dur*2 cubic-bezier(.75,-0.5,0,1.75));
+    }
     &-box {
       position: absolute;
       z-index: 100;
@@ -186,6 +214,10 @@ $ease: cubic-bezier(0.165, 0.840, 0.440, 1.000);
       width: 120px;
       height: 120px;
       margin: auto;
+
+      &:before {
+        content: none;
+      }
     }
   }
   &-image-list {
@@ -197,6 +229,11 @@ $ease: cubic-bezier(0.165, 0.840, 0.440, 1.000);
         @include transition(transform $dur*2.5 $ease);
         @include transform(scale(0.8));
 
+        .profile-image {
+          &:before {
+            @include transform(scale(0));
+          }
+        }
         span {
           @include transition(opacity $dur*2 $ease);
           opacity: 0;
@@ -205,18 +242,23 @@ $ease: cubic-bezier(0.165, 0.840, 0.440, 1.000);
       &-current {
         @include transform(scale(1));
 
+        .profile-image {
+          &:before {
+            @include transform(scale(1));
+          }
+        }
         span {
           display: block;
           margin: 0 -0.5rem;
           opacity: 1;
 
           &:before {
-            content: '“';
+            content: '"';
             display: inline-block;
             margin-right: 0.5rem;
           }
           &:after {
-            content: '”';
+            content: '"';
             display: inline-block;
             margin-left: 0.5rem;
           }
@@ -458,6 +500,9 @@ $ease: cubic-bezier(0.165, 0.840, 0.440, 1.000);
         @include transition(transform $dur+0.2 $ease);
         @include transform(rotate(360deg));
       }
+      &.is-nomore {
+       @include transform(rotate(45deg)); 
+      }
       &:before,
       &:after {
         content: '';
@@ -483,13 +528,16 @@ $ease: cubic-bezier(0.165, 0.840, 0.440, 1.000);
 .comment {
   padding: 0 1.5rem;
 
+  & + .footer {
+    margin-top: -1.2rem;
+  }
   h1.h {
     padding: 3rem 1rem;
     text-align: center;
     text-transform: uppercase;
   }
 }
-.loading {
+.intro {
   overflow: hidden;
   position: fixed;
   z-index: 10000;
@@ -550,6 +598,20 @@ $ease: cubic-bezier(0.165, 0.840, 0.440, 1.000);
       }
     }
   }
+  &-svg {
+    max-width: 250px;
+
+    &.is-fill {
+      path {
+        fill: $brand;
+      }
+    }
+    path {
+      fill: transparent;
+      stroke: $brand;
+      @include transition(fill $dur*2 $ease);
+    }
+  }
 }
 .loader {
   position: fixed;
@@ -568,13 +630,13 @@ $ease: cubic-bezier(0.165, 0.840, 0.440, 1.000);
 .scroll-view {
   display: block;
   position: fixed;
-  z-index: 100;
+  z-index: 10000;
   top: 0;
   left: 0;
   height: 3px;
   width: 0;
   background-color: $brand;
-  @include transition(width $dur*1.3 $ease);
+  @include transition(width $dur $ease);
 }
 .main-enter-active,
 .main-leave-active {

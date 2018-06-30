@@ -7,7 +7,7 @@
       </li>
     </ul>
     <div class="func">
-      <button type="button" class="btn btn-more" :class="{'is-loading':isArchive}" ref="more"><span class="a11y">사진 더보기</span></button>
+      <button type="button" class="btn btn-more" :class="{'is-loading':isArchive, 'is-nomore': archiveLength >= lists.length}" ref="more"><span class="a11y">사진 더보기</span></button>
     </div>
   </div>
 </template>
@@ -43,10 +43,17 @@ export default {
     // }, false);
     $btn.addEventListener('click', (e) => {
       e.stopPropagation()
-      this.$store.commit('addImage', true)
-      setTimeout(()=>{
-        this.$store.dispatch('loaderTrigger')
-      }, 500)
+
+      if(this.archiveLength >= this.lists.length) {
+        return false;
+      } else {
+        this.$store.commit('addImage', true)
+        setTimeout(()=>{
+          this.$store.dispatch('loaderTrigger')
+        }, 500)
+
+      }
+
     })
   },
   computed: {
