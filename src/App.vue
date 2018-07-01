@@ -67,9 +67,11 @@ export default {
                 className: '+=is-blind'
               })
               .set($intro, {
+                delay: 0.3,
                 className: '+=is-hidden'
               })
               .set(document.querySelector('body'), {
+                delay: 0.3,
                 className: '-=is-intro',
                 onComplete: () => {
                   $intro.remove()
