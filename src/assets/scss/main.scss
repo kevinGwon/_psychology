@@ -601,12 +601,10 @@ body {
   &-svg {
     max-width: 250px;
 
-    &.is-fill {
-      path {
+    path {
+      &.is-fill {
         fill: $brand;
       }
-    }
-    path {
       fill: transparent;
       stroke: $brand;
       @include transition(fill $dur*2 $ease);

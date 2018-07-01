@@ -34,45 +34,51 @@ export default {
       let $intro = document.querySelector('.intro'),
           $introSvg = $('.intro-svg'),
           $path = $introSvg.find('path'),
-          pathLength = $path.get(0).getTotalLength(),
-          tl = new TimelineMax()
+          tl = new TimelineMax(),
+          delay = 0.1
 
+      $path.each((i, el)=>{
+        let $el = $(el),
+            pathLength = $el.get(0).getTotalLength()
 
-      TweenMax.set($path, {
-          strokeDasharray: pathLength
-      })
-      drawingSign();
-      
-      function drawingSign() {
-          tl
-          .fromTo($path, 1.5, {
-            strokeDashoffset: pathLength
-          }, {
-            strokeDashoffset: pathLength * 2,
-            onComplete: () => {
-              TweenMax.set($introSvg, {
-                className: '+=is-fill',
-                onComplete: () => {
-                  TweenMax.to($introSvg, 0.5, {
-                    delay: 1,
-                    autoAlpha: 0
-                  })
-                }
+        TweenMax.set(el, {
+            strokeDasharray: pathLength
+        })
+
+        TweenMax
+        .fromTo(el, 0.15, {
+          strokeDashoffset: pathLength
+        }, {
+          delay: delay += 0.12,
+          className: '+='+i,
+          strokeDashoffset: pathLength * 2,
+          onComplete: () => {
+            TweenMax.set($el, {
+              className: '+=is-fill',
+            })
+            if(i == $path.length-1) {
+              tl
+              .to($introSvg, 0.5, {
+                delay: 0.5,
+                autoAlpha: 0
               })
+              .set($intro, {
+                delay: 0.3,
+                className: '+=is-blind'
+              })
+              .set($intro, {
+                className: '+=is-hidden'
+              })
+              .set(document.querySelector('body'), {
+                className: '-=is-intro',
+                onComplete: () => {
+                  $intro.remove()
+                }
+              })              
             }
-          })
-          .set($intro, {
-            delay: 1.5,
-            className: '+=is-blind'
-          })
-          .set($intro, {
-            delay: 1,
-            className: '+=is-hidden'
-          })
-          .set(document.querySelector('body'), {
-            className: '-=is-intro'
-          })          
-      }
+            }
+        })
+      })        
     },    
     scrollView() {
       let top = 0,

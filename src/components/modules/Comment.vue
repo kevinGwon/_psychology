@@ -1,6 +1,6 @@
 <template>
   <div class="comment">
-    <h1 class="h">Comment</h1>
+    <h1 class="h">Visitors book</h1>
     <div id="disqus_thread"></div>
   </div>
 </template>
