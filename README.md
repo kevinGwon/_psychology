@@ -4,7 +4,7 @@ https://kevingwon.github.io/psychology/
 
 # psychology
 
-> A Vue.js project
+Vue.js project
 
 ## Build Setup
 
